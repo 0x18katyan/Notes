@@ -1,0 +1,19 @@
+{
+    "cSpell.words": [
+        "cepstral",
+        "figsize",
+        "Hann",
+        "librosa",
+        "matplotlib",
+        "mels",
+        "MFCC",
+        "MFCCs",
+        "MNIST",
+        "pyplot",
+        "someaudio",
+        "Spectogram",
+        "STFT",
+        "torchaudio",
+        "waveplot"
+    ]
+}
