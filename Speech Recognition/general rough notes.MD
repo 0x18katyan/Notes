@@ -31,3 +31,60 @@ In Speech Recognition, the information of the future context is equally as impor
 
 ## Mel Spectrograms
 
+### Code
+
+Source : [TorchAudio Tutorial](https://pytorch.org/audio/0.11.0/tutorials/audio_feature_extractions_tutorial.html#spectrogram)
+
+#### Converting to Spectrogram
+
+**The GriffinLim is used to convert a spectrogram back into a waveform.**
+
+
+```Python
+
+import torchaudio.transforms as T
+
+waveform, sample_rate = get_speech_sample()
+
+## Get the spectrogram for the waveform.
+sample_spectrogram = T.Spectrogram(
+    n_fft = n_fft,
+    win_length = win_length,
+    hop_length = hop_length
+    )(waveform)
+
+griffin_lim = T.GriffinLim(
+    n_fft = n_fft,
+    win_length = win_length,
+    hop_length = hop_length
+)
+
+waveform = griffin_lin(sample_spectrogram)
+
+```
+
+#### Converting to Mel Spectrogram
+
+```Python
+
+waveform, sampling_rate = get_speech_sample()
+
+mel_spectrogram = T.MelSpectrogram(
+
+    sample_rate = sampling_rate,
+    n_fft = n_fft,
+    win_length = win_length,
+    hop_length = hop_length,
+    center = True,
+    pad_mode = "reflect",
+    power = 2.0,
+    norm = "slaney",
+    ondeside = True,
+    n_mels = n_mels,
+    mel_scale = "htk"
+)
+
+melspec = mel_spectrogram(waveform)
+
+
+```

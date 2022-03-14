@@ -143,3 +143,5 @@ Audio(AUDIO_FILE)
 When an audio signal data is loaded, the data is decompressed from the file into an array. An audio clip with sampling rate of 16000 and length of 1 second will produce an array of length 16000. The array will only contain amplitude values.
 
 Bit-depth is used to gauge the range of amplitude measurements for each sample. A bit-depth of 16 means that amplitude can vary from 0 to 65535 ( $2^{16}$  - 1). Higher bit-depth means the audio will contain more information that closely resembles the original sound of the recording.
+
+
