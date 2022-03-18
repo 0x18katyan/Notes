@@ -22,6 +22,8 @@ class SEBlock(nn.Module):
         
     def forward(self, x):
         
+        bs, cs, _, _ = x.size()
+        
         ## Squeeze Module
         x1 = F.adaptive_avg_pool2d(x, 1)
         
@@ -29,7 +31,9 @@ class SEBlock(nn.Module):
         x1 = self.excitation(x)
         
         ## Scale Module
-        x1 = F.sigmoid(x)
+        x1 = F.sigmoid(x1).reshape(bs, cs)
+        
+        ## PyTorch performs expansion by default
         x = x * x1
         
         return x
