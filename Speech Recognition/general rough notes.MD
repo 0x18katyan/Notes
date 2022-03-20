@@ -85,6 +85,4 @@ mel_spectrogram = T.MelSpectrogram(
 )
 
 melspec = mel_spectrogram(waveform)
-
-
 ```

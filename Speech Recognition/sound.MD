@@ -144,4 +144,3 @@ When an audio signal data is loaded, the data is decompressed from the file into
 
 Bit-depth is used to gauge the range of amplitude measurements for each sample. A bit-depth of 16 means that amplitude can vary from 0 to 65535 ( $2^{16}$  - 1). Higher bit-depth means the audio will contain more information that closely resembles the original sound of the recording.
 
-
