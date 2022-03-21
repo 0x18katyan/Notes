@@ -226,8 +226,111 @@ combinedRDD = errorRDD.union(warningsRDD)
 
 ### Pair RDDs in PySpark
 
+Could be understood as dataset API for a Python dictionary.
+
 - Real life datasets are usually key/value pairs.
 
 - Each row is a key and maps to one or more values.
 
-- 
+Can be initialized from an array of tuples as :
+
+```Python
+some_tuple = [('A', 32), ('B', 68), ('C', 69)] 
+pairRDD = sc.parallelize(some_tuple)
+
+normalRDD = [('A 32'), ('B 68'), ('C 69')]
+pairRDD_2 = normalRDD.map(lambda s: (s.split(' ')[0], s.split(' ')[1]))
+```
+
+- All regular transformations are available for pair RDDs
+
+### Special Transformations for Pair RDD:
+
+There are some special transformations for Pair RDDs.
+
+1. reduceByKey()
+2. sortByKey()
+3. groupByKey()
+4. join()
+
+#### reduceByKey()
+
+- Combines values with the same key.
+- Runs parallel operations for each key in the dataset.
+- Is a transformation and not an action.
+
+```Python
+pairRDD_reduced = regularRDD.reduceByKey(lambda x, y: x * y)
+pairRDD_reduced.collect()
+```
+
+#### sortByKey()
+
+- Sorts pair RDD by key.
+
+```Python
+pairRDD.sortByKey(ascending = False).collect()
+```
+
+#### groupByKey()
+
+- groupByKey() groups values with the same key.
+
+```Python
+pairRDD_group = regularRDD.groupByKey().collect()
+
+for col1, col2 in pairRDD_group:
+    print(col1, list(col2))
+```
+
+#### join()
+
+```Python
+RDD1.join(RDD2).collect()
+```
+
+### Advanced RDD Actions
+
+- saveAsTextFile() action: saves RDD as text file.
+
+- Pair RDD Action:
+    1. countByKey() - count number of values by key name.
+    2. collectAsMap() - return the key-value pairs as a dictionary.
+
+```Python
+total = Rdd.countByKey()
+
+for k, v in total.items():
+    print(f"key {k} has {v} counts.")
+```
+
+### PySpark DataFrames
+
+- DataFrame is an immutable distributed collection of data with named columns.
+
+- DataFrame API is available in Python, R, Scala, and Java.
+
+- DataFrames support SQL syntax as well as expression methods such as `dataframe.select()`.
+
+- SparkSession is the Entrypoint for the DataFrame API.
+
+- SparkSession is available in PySpark shell as Spark.
+
+- Can be initialized with `RDD.createDataFrame()`.
+
+- Can be initialized with SparkSession's read method.
+
+- Spark DataFrames need schema.
+
+```Python
+spark_df = spark.createDataFrame(RDD, schema = column_names)
+```
+
+- Schema can be inferred using `inferSchema` option while creating the dataframe.
+
+#### Read Methods
+
+- `spark.read.csv()`
+- `spark.read.json()`
+- `spark.read.txt()`
+
