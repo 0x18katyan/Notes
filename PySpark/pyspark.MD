@@ -304,33 +304,8 @@ for k, v in total.items():
     print(f"key {k} has {v} counts.")
 ```
 
-### PySpark DataFrames
+## MLlib
 
-- DataFrame is an immutable distributed collection of data with named columns.
+- MLlib only supports Resilient Distributed Datasets.
 
-- DataFrame API is available in Python, R, Scala, and Java.
-
-- DataFrames support SQL syntax as well as expression methods such as `dataframe.select()`.
-
-- SparkSession is the Entrypoint for the DataFrame API.
-
-- SparkSession is available in PySpark shell as Spark.
-
-- Can be initialized with `RDD.createDataFrame()`.
-
-- Can be initialized with SparkSession's read method.
-
-- Spark DataFrames need schema.
-
-```Python
-spark_df = spark.createDataFrame(RDD, schema = column_names)
-```
-
-- Schema can be inferred using `inferSchema` option while creating the dataframe.
-
-#### Read Methods
-
-- `spark.read.csv()`
-- `spark.read.json()`
-- `spark.read.txt()`
-
+- Has Classification, Regression, Clustering and Recommendation Engine algorithms.

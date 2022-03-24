@@ -1,6 +1,9 @@
 {
     "cSpell.words": [
         "dataframe",
-        "HDFS"
+        "distplot",
+        "HDFS",
+        "Matplotlib",
+        "pyspark"
     ]
 }

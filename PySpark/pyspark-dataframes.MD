@@ -88,3 +88,23 @@ df = spark.read.csv(csv_path, header=True, inferSchema=True)
 
     Syntax: `df.describe().show()`
 
+## SQL Queries
+
+- PySpark can execute SQL queries using SparkSQL with DataFrame API and SQL queries.
+
+- DataFrame API is a Domain-Specific Language (DSL).
+
+- DataFrame API is easier than SQL.
+
+- SQL queries are concise and universally understood.
+
+- Operations on DataFrames can be done by executing SQL.
+
+- To use SQL with DataFrame:
+    1. Create a Table:
+        - `dataframe.createOrReplaceTempView('table1')`
+    2. Execute the Query and store it:
+        - `df2 = spark.sql("SELECT col1 from table1")`
+        - `df2.collect()`
+
+- SQL query returns a DataFrame.
