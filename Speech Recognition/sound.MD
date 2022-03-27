@@ -84,7 +84,6 @@ MFCC feature extraction is composed of the following steps:
 4. Convert to a Mel scale.
 5. Apply inverse discrete cosine transform (DCT).
 
-
 ## Uses of Deep Learning for Audio
 
 - Audio Classification - Detect specific sounds like a fire alarm.

@@ -77,3 +77,7 @@ Fourier Transform allows us to decompose a signal into individual frequencies an
 For non-periodic signals, the signal can be windowed then transformed into the spectrum. This is called short-time Fourier Transform. The FFT is applied to overlapping windows of the signal and the result is called a spectogram.
 
 Multiply the time-domain values by the Hann window to reduce spectral leakage.
+
+### Transform from Multi Channel to Single Channel
+
+$mono = \frac{chan_1 + chan_2...chan_n}n$
