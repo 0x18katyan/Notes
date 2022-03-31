@@ -9,7 +9,7 @@ class BadhanauAttention(nn.Module):
         self.alignment_nn = nn.Linear(in_features = hidden_dim * 2, out_features = hidden_dim)
         self.v_t = nn.Linear(in_features = hidden_dim, out_features = 1)
     
-    def forwad(self, encoder_hidden_states, decoder_hidden_state):
+    def forward(self, encoder_hidden_states, decoder_hidden_state):
         
         ##score is the e_ij
         
