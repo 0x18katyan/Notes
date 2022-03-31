@@ -86,3 +86,11 @@ mel_spectrogram = T.MelSpectrogram(
 
 melspec = mel_spectrogram(waveform)
 ```
+
+### Data Cleaning
+
+- Convert text to lowercase. This can be later corrected by a grammar focused Language Model, the most important thing is to identify vocals and pair them with characters or words.
+
+- Remove Unicode and Accent characters, unicode characters may sometimes be introduced to the text corpus, these are not used in everyday language and can be easily described using characters and words. Same goes for the accent characters, we are more concerned with identifying the text in the audio rather than identifying the accent.
+
+- CommonVoice dataset is very dirty, it has a lot of accent, unicode and chinese characters.
