@@ -132,7 +132,6 @@ df = df.withColumn('reversedName', reverseUDF(df['Name']))
 df = df.cache()
 ```
 
-
 ### File Reading
 
 - More files better than one large file.
