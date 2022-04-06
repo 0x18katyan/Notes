@@ -11,3 +11,7 @@
     2. Exploding gradients - Exploding gradients can be another reason for the fluctuating loss. This can be neutralized by **clipping gradients** either by value or by norm.
 
     3. Small batch size - Small batch size means that the gradients are not representative of the general distribution of the outputs. If increasing batch size is not possible, try **gradient averaging**.
+
+## Deep Learning
+
+- Argmax is non-differentiable. Calculate the loss with softmax or logits.

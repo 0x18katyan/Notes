@@ -94,3 +94,13 @@ melspec = mel_spectrogram(waveform)
 - Remove Unicode and Accent characters, unicode characters may sometimes be introduced to the text corpus, these are not used in everyday language and can be easily described using characters and words. Same goes for the accent characters, we are more concerned with identifying the text in the audio rather than identifying the accent.
 
 - CommonVoice dataset is very dirty, it has a lot of accent, unicode and chinese characters.
+
+### Transducer
+
+[Transducer](https://lorenlugosch.github.io/posts/2020/11/transducer/)
+
+
+
+### Training
+
+- Teacher forcing is essential for training the network, higher values lead to better loss descent during the training. 
