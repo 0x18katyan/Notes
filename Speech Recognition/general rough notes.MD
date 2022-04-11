@@ -100,7 +100,12 @@ melspec = mel_spectrogram(waveform)
 [Transducer](https://lorenlugosch.github.io/posts/2020/11/transducer/)
 
 
-
 ### Training
 
-- Teacher forcing is essential for training the network, higher values lead to better loss descent during the training. 
+- Teacher forcing is essential for training the network, higher values lead to better loss descent during the training but will result in worser predictions during inference due to the model expecting a different distribution if the model is getting the correct inputs too often.
+
+- CTC expects that the **first target sentence does not** have blanks. If the first target, does have blanks, it will output negative CTC loss.
+
+- No need to worry about padding during CTC training because the loss won't calculate after the target length, in case of padded targets.
+
+- Cannot use LSTM Layer (should use LSTM Cell) as indicated by [CMU LAS Homework](https://deeplearning.cs.cmu.edu/F20/document/homework/Homework_4_2.pdf). Will have to dig in deeper to know why and does it apply to GRU too?

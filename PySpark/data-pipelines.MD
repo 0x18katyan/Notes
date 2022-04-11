@@ -46,3 +46,83 @@ split_df = split_df.withColumn('dog_list', udfRetriever(split_df.split_cols, spl
 # Remove the original column, split_cols, and the colcount
 split_df = split_df.drop('cols').drop('split_cols').drop('colcount')
 ```
+
+## Data Validation
+
+- Verifying that format is as expected.
+- Number of rows / columns.
+- Data types; integers, strings, dates.
+- Complex validation rules; valid url, valid address.
+
+### Validating with joins
+
+- Compare with known values.
+- Comparatively fast.
+- Removes rows not present in the valid data.
+
+```Python
+verified_df = df.join(valid_df, df.col == valid_df.col)
+```
+
+### Complex rule validation
+
+- Calculations such as max and min.
+- Using external source; API calls, local files.
+
+```Python
+# Determine the row counts for each DataFrame
+split_count = split_df.count()
+joined_count = joined_df.count()
+
+# Create a DataFrame containing the invalid rows
+invalid_df = split_df.join(F.broadcast(joined_df), 'folder', 'right')
+
+# Validate the count of the new DataFrame is as expected
+invalid_count = invalid_df.count()
+print(" split_df:\t%d\n joined_df:\t%d\n invalid_df: \t%d" % (split_count, joined_count, invalid_count))
+
+# Determine the number of distinct folder rows removed
+invalid_folder_count = invalid_df.select('folder').distinct().count()
+print("%d distinct invalid folders found" % invalid_folder_count)
+```
+
+
+
+```Python
+# Create a function to return the number and type of dogs as a tuple
+def dogParse(doglist):
+  dogs = []
+  for dog in doglist:
+    (breed, start_x, start_y, end_x, end_y) = dog.split(',')
+    dogs.append((breed, int(start_x), int(start_y), int(end_x), int(end_y)))
+  return dogs
+
+# Create a UDF
+udfDogParse = F.udf(dogParse, ArrayType(DogType))
+
+# Use the UDF to list of dogs and drop the old column
+joined_df = joined_df.withColumn('dogs', udfDogParse('dog_list')).drop('dog_list')
+
+# Show the number of dogs in the first 10 rows
+joined_df.select(F.size('dogs')).show(10)
+```
+
+```Python
+# Define a UDF to determine the number of pixels per image
+def dogPixelCount(doglist):
+  totalpixels = 0
+  for dog in doglist:
+    totalpixels += (dog[3] - dog[1]) * (dog[4] - dog[2])
+  return totalpixels
+
+joined_df.printSchema()
+# Define a UDF for the pixel count
+udfDogPixelCount = F.udf(dogPixelCount, IntegerType())
+joined_df = joined_df.withColumn('dog_pixels', udfDogPixelCount('dogs'))
+
+# Create a column representing the percentage of pixels
+joined_df = joined_df.withColumn('dog_percent', (joined_df.dog_pixels / (joined_df.width * joined_df.height)) * 100)
+
+# Show the first 10 annotations with more than 60% dog
+joined_df.select(joined_df['dog_percent'] > 60)
+```
