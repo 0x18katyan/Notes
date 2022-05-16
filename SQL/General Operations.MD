@@ -1,5 +1,110 @@
 # General Operations
 
+## SELECT
+
+Limit number of rows returned with TOP.
+
+```SQL
+SELECT TOP(5) artist from artists;
+```
+
+Show 5% of artists.
+```SQL
+SELECT TOP(5) PERCENT artist from artists;
+```
+
+Note: `TOP` works like `head()` in pandas so the top-most columns are retrieved as they were saved to the table in the database.
+
+## DISTINCT
+
+`DISTINCT` is used to select unique values.
+
+```SQL
+SELECT DISTINCT artist from artists;
+```
+
+## AS
+
+`AS` can be used to alias a column name. It is generally used to make longer column names shorter or complex column names simpler.
+
+```SQL
+SELECT long_column_name AS col FROM table_name;
+```
+
+## ORDER BY
+
+Sorts by `rating` and `number_albums`. 
+
+First, the results are sorted by `rating` then if any rows have similar ratings then uses `number_albums` for sorting again.
+
+```SQL
+SELECT TOP (10) id, year
+FROM artists
+ORDER BY rating, number_albums;
+```
+
+Sorts the result by `rating` in descending order.
+
+```SQL
+SELECT TOP (10) id, year
+FROM artists
+ORDER BY rating DESC, number_albums;
+```
+
+Use descending order for both `rating` and `number_albums`.
+
+```SQL
+SELECT TOP (10) id, year
+FROM artists
+ORDER BY rating DESC, number_albums DESC;
+```
+
+## WHERE
+
+`WHERE` clause is used for filtering results.
+
+Find `id` of items in `items` whose price is greater than 300.
+
+```SQL
+SELECT id, price
+FROM items
+WHERE price > 300;
+```
+
+### Not Equal
+
+Non equality is checked by using `<>`.
+
+Retrieve items whose price is not 300.
+
+```SQL
+SELECT id, price
+FROM items
+WHERE price <> 300;
+```
+
+### BETWEEN
+
+`BETWEEN` clause is used to only retrieve values within a range.
+
+Selects `id` with price between 69 and 420.
+
+```SQL
+SELECT id, price
+FROM items
+WHERE price BETWEEN 69 AND 420;
+```
+
+#### NOT BETWEEN
+
+`NOT BETWEEN` can be used to only retrieve values outside of a range.
+
+```SQL
+SELECT id, price
+FROM invoice
+WHERE price NOT BETWEEN 69, 420;
+```
+
 ## CRUD
 
 ### Create Table
@@ -103,4 +208,3 @@ GROUP BY
 ```
 
 While performing joins, the order of the table.column that are of either sides of `ON` doesn't matter.
-
